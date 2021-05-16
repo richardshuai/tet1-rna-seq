@@ -1,0 +1,7 @@
+name: edgeR
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - bioconductor-edger=3.32.1=r40h399db7b_0
+  - bioconductor-limma=3.46.0=r40hd029910_1

@@ -1,0 +1,7 @@
+name: pyensembl
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - pandas=1.2.4=py39hde0f152_0
+  - pyensembl=1.9.1=pyh3252c3a_0

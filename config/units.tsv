@@ -1,0 +1,7 @@
+sample_name	unit_name	fq1	fq2	sra	adapters	strandedness
+KU1	lane1	data/resequenced_new_data/data/KU1.fastq.gz
+KU2	lane1	data/resequenced_new_data/data/KU2.fastq.gz
+KU3	lane1	data/resequenced_new_data/data/KU3.fastq.gz
+WU1	lane1	data/resequenced_new_data/data/WU1.fastq.gz
+WU2	lane1	data/resequenced_new_data/data/WU2.fastq.gz
+WU3	lane1	data/resequenced_new_data/data/WU3.fastq.gz
