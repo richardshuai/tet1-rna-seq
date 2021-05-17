@@ -21,6 +21,7 @@ normalized.cts <- as.data.frame(getNormalizedData(tcc))
 normalized.cts <- tibble::rownames_to_column(normalized.cts, "gene_id")
 normalized.cts$gene_id <- as.factor(normalized.cts$gene_id)
 
+
 # Get DGEs and filter by L2FC
 tcc <- estimateDE(tcc, test.method = "edger", FDR=FDR_CUTOFF) # DEG identification
 res <- getResult(tcc, sort = TRUE)

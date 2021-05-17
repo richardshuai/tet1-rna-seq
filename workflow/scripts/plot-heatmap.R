@@ -3,6 +3,7 @@ sink(log)
 sink(log, type="message")
 
 library(pheatmap)
+library(edgeR)
 
 dge <- read.table(snakemake@input[["dge"]], sep = '\t', header = TRUE, row.names = NULL)
 samples <- read.table(snakemake@params[["samples"]], sep = '\t', header = TRUE)
@@ -12,9 +13,9 @@ samples <- read.table(snakemake@params[["samples"]], sep = '\t', header = TRUE)
 dge <- dge[dge$estimatedDEG == 1, ]
 rownames(dge) <- dge$gene_symbol
 
-# Compute row-wise z-scores of normalized counts
+# Compute row-wise z-scores of log cpm normalized counts
 normalized.cts <- dge[, -(1:7)]
-z.scores <- t(scale(t(normalized.cts)))
+z.scores <- t(scale(t(cpm(normalized.cts, log=TRUE))))
 z.scores <- z.scores[order(-dge$q.value),]
 
 comparison.groups <- as.data.frame(factor(samples$condition))
@@ -32,6 +33,7 @@ z.scores <- z.scores[select.all, ]
 
 # Create heatmap and save to file
 col_palette <- colorRampPalette(c("#4233AA", "#FCFFD2", "#F93203"))(n=500)
+# Condition <- c("#000000", "#804B09")
 Condition <- c("#1B4FAB", "#0CA402")
 names(Condition) <- levels(as.factor(samples$condition))
 anno.colors <- list(Condition = Condition)
