@@ -1,7 +1,7 @@
-sample_name	condition	ID
-KL1	ko	1
-KL2	ko	2
-KL3	ko	3
-WL1	wt	1
-WL2	wt	2
-WL3	wt	3
+sample_name	condition
+WU1	WU
+WU2	WU
+WU3	WU
+KU1	KU
+KU2	KU
+KU3	KU

@@ -29,9 +29,9 @@ pca:
 diffexp:
   # contrasts for the deseq2 results method
   contrasts:
-    ko-vs-wt:
-      - ko
-      - wt
+    WU-vs-KU:
+      - WU
+      - KU
   model: ~condition
 
 params:

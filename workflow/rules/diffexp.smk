@@ -14,80 +14,47 @@ rule count_matrix:
         "../scripts/count-matrix.py"
 
 
-rule deseq2_init:
+rule tcc:
     input:
         counts="results/counts/all.tsv",
     output:
-        "results/deseq2/all.rds",
+        dge="results/tcc/diffexp.tsv"
     params:
         samples=config["samples"],
-        model=config["diffexp"]["model"],
     conda:
-        "../envs/deseq2.yaml"
+        "../envs/tcc.yaml"
     log:
         "logs/deseq2/init.log",
-    threads: get_deseq2_threads()
+    threads: get_tcc_threads()
     script:
-        "../scripts/deseq2-init.R"
+        "../scripts/tcc.R"
 
 
-rule deseq2:
+rule annotate_table:
     input:
-        "results/deseq2/all.rds",
+        dge="results/tcc/diffexp.tsv"
     output:
-        table=report(
-            "results/diffexp/{contrast}.diffexp.tsv", "../report/diffexp.rst"
-        ),
-        ma_plot=report("results/diffexp/{contrast}.ma-plot.svg", "../report/ma.rst"),
-    params:
-        contrast=get_contrast,
-    conda:
-        "../envs/deseq2.yaml"
-    log:
-        "logs/deseq2/{contrast}.diffexp.log",
-    threads: get_deseq2_threads
-    script:
-        "../scripts/deseq2.R"
-
-rule pca:
-    input:
-        "results/deseq2/all.rds",
-    output:
-        report("results/pca.svg", "../report/pca.rst"),
-    params:
-        pca_labels=config["pca"]["labels"],
-    conda:
-        "../envs/deseq2.yaml"
-    log:
-        "logs/pca.log",
-    script:
-        "../scripts/plot-pca.R"
-
-rule tmm_norm:
-    input:
-        counts="results/counts/all.tsv"
-    output:
-        table="results/counts/TMM_normalized.tsv"
-    params:
-        samples=config["samples"],
-    conda:
-        "../envs/edgeR.yaml"
-    log:
-        "logs/tmm_norm.log"
-    script:
-        "../scripts/normalize_TMM.R"
-
-rule make_table:
-    input:
-        counts="results/counts/TMM_normalized.tsv",
-        dge="results/diffexp/{contrast}.diffexp.tsv"
-    output:
-        table="results/tables/{contrast}.table.tsv",
+        table="results/tables/table.tsv",
     params:
         gtf="resources/genome.gtf",
     conda:
         "../envs/pyensembl.yaml"
     log:
-        "logs/{contrast}.make_table.log"
+        "logs/annotate_table.log"
     script:
-        "../scripts/make_table.py"
+        "../scripts/annotate_table.py"
+
+
+rule heatmap:
+    input:
+        dge="results/tables/table.tsv",
+    params:
+        samples=config["samples"]
+    output:
+        heatmap="results/heatmap.jpeg"
+    conda:
+        "../envs/pheatmap.yaml"
+    log:
+        "logs/heatmap.log"
+    script:
+        "../scripts/plot-heatmap.R"

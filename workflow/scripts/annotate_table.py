@@ -9,12 +9,7 @@ def main():
         annotation_name='mus_musculus',
         gtf_path_or_url=snakemake.params.gtf)
     data.index()
-
-    df_cts = annotate(snakemake.input.counts, data)
-    df_dge = annotate(snakemake.input.dge, data)
-    df = df_dge.merge(df_cts, how='inner', left_index=True, right_index=True)
-    df = df.sort_values(by='padj')
-
+    df = annotate(snakemake.input.dge, data)
     df.to_csv(snakemake.output.table, sep='\t')
 
 

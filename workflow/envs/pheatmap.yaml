@@ -1,0 +1,6 @@
+name: pheatmap
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - r-pheatmap=1.0.12=r40h6115d3f_2

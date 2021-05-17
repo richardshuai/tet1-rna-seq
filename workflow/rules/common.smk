@@ -17,9 +17,7 @@ samples = (
 
 def get_final_outputs():
     final_outputs = (
-        expand("results/tables/{contrast}.table.tsv",
-            contrast=config["diffexp"]["contrasts"],),
-        "results/pca.svg",
+        "results/heatmap.jpeg",
     )
     return final_outputs
 
@@ -147,7 +145,7 @@ def get_strandedness(units):
         return strand_list * units.shape[0]
 
 
-def get_deseq2_threads(wildcards=None):
+def get_tcc_threads(wildcards=None):
     # https://twitter.com/mikelove/status/918770188568363008
     few_coeffs = False if wildcards is None else len(get_contrast(wildcards)) < 10
     return 1 if len(samples) < 100 or few_coeffs else 6
