@@ -34,7 +34,7 @@ z.scores <- z.scores[select.all, ]
 col_palette <- colorRampPalette(c("#4233AA", "#FCFFD2", "#F93203"))(n=500)
 Condition <- c("#1B4FAB", "#0CA402")
 names(Condition) <- levels(as.factor(samples$condition))
-anno_colors <- list(Condition = Condition)
+anno.colors <- list(Condition = Condition)
 
 ## Swap ordering of columns
 z.scores <- z.scores[, c(4, 5, 6, 1, 2, 3)]
@@ -49,7 +49,7 @@ heatmap <- pheatmap(z.scores,
                     col=col_palette,
                     border_color="white",
                     annotation=comparison.groups,
-                    annotation_color=anno_colors,
+                    annotation_color=anno.colors,
                     annotation_names_col=FALSE,
                     legend=TRUE,
                     fontsize=8,
