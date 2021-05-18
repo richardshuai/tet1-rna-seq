@@ -21,7 +21,7 @@ def main(tsv_path):
 
     parent_dir = os.path.dirname(tsv_path)
     name, ext = os.path.splitext(os.path.basename(tsv_path))
-    out_dir = os.path.join(parent_dir, "{}_anno.{}".format(name, ext))
+    out_dir = os.path.join(parent_dir, "{}_anno{}".format(name, ext))
 
     df.to_csv(out_dir, sep='\t')
 
