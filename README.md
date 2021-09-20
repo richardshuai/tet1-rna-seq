@@ -1,5 +1,5 @@
 # tet1-rna-seq
-Differential gene expression analysis to investigate effects of knocking out TET1:
+Differential gene expression analysis to understand TET1 gene regulatory pathway:
 
 TET1 controls Cxcl1 induction by DNA demethylation and promotes neutrophil recruitment during acute lung injury  
 Kathleen M. Yee, Richard W. Shuai, Bin Liu, Christian A. Huynh, Chao Niu, Hailey R. Lee, Min S. Lee, Jirui Wen, Jian Zou, Jiang Wu, Ke Shuai  
